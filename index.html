@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taxi Lugnet – Taxi i Falun | Ring 070-333 38 18</title>
+  <meta name="description" content="Taxi Lugnet – din lokala taxi i Falun. Tryggt, punktligt och personligt. Ring 070-333 38 18 för snabb upphämtning.">
+  <!-- Förhandsvisning: ta bort noindex när sidan lanseras på riktigt -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/png" href="bilder/logo-rod.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rod: #a3202a;
+      --rod-mork: #7d161e;
+      --rod-ljus: #fbeeee;
+      --vit: #ffffff;
+      --sand: #f6f4f0;
+      --sand-2: #efebe5;
+      --text: #3a3d43;
+      --morkt: #16181b;
+      --dampad: #6b7079;
+      --linje: #e6e2dc;
+      --skugga: 0 10px 30px rgba(30, 25, 20, .08);
+      --rubrik: "Barlow Condensed", "Arial Narrow", sans-serif;
+      --brod: "Barlow", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--brod); background: var(--vit); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .wrap > * { min-width: 0; }
+    h1, h2, h3 { font-family: var(--rubrik); color: var(--morkt); text-transform: uppercase; line-height: 1.05; letter-spacing: .5px; }
+    .overrubrik { font-family: var(--rubrik); font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--rod); font-size: .95rem; }
+
+    /* ---------- Ringknapp ---------- */
+    .ring {
+      position: relative; display: inline-flex; align-items: center; gap: 12px;
+      background: var(--rod); color: var(--vit); text-decoration: none;
+      font-family: var(--rubrik); font-weight: 700; font-size: 1.35rem; letter-spacing: 1px; text-transform: uppercase;
+      padding: 16px 30px 16px 22px; border-radius: 8px;
+      box-shadow: 0 10px 26px rgba(163, 32, 42, .3);
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .ring:hover { background: #b8252f; transform: translateY(-2px); box-shadow: 0 14px 32px rgba(163, 32, 42, .42); }
+    .ring .lur { position: relative; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.18); display: grid; place-items: center; flex-shrink: 0; }
+    .ring .lur svg { width: 20px; height: 20px; }
+    .ring .lur::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(255,255,255,.65); animation: puls 2.2s ease-out infinite; }
+    .ring small { display: block; font-family: var(--brod); font-size: .78rem; font-weight: 500; letter-spacing: .3px; text-transform: none; opacity: .9; line-height: 1.2; }
+    .ring span { line-height: 1.1; }
+    @keyframes puls { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
+
+    .sektion-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-top: 40px; }
+    .sektion-cta.mitten { justify-content: center; }
+    .sektion-cta p { color: var(--dampad); font-size: 1.02rem; }
+
+    /* ---------- Sidhuvud ---------- */
+    header {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(255, 255, 255, .88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--linje);
+    }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .varumarke { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .varumarke img { height: 40px; width: auto; }
+    .varumarke b { font-family: var(--rubrik); font-weight: 800; font-size: 1.6rem; color: var(--morkt); letter-spacing: 1px; }
+    .header-ring {
+      display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+      font-family: var(--rubrik); font-weight: 700; font-size: 1.2rem; color: var(--vit); letter-spacing: .5px;
+      background: var(--rod); padding: 9px 18px; border-radius: 8px; transition: background .2s;
+    }
+    .header-ring:hover { background: #b8252f; }
+    .header-ring svg { width: 18px; height: 18px; }
+    .header-ring .kort-text { display: none; }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative; overflow: hidden;
+      background:
+        radial-gradient(ellipse 55% 70% at 5% 0%, rgba(255, 214, 150, .35), transparent 60%),
+        radial-gradient(ellipse 45% 55% at 95% 90%, rgba(163, 32, 42, .08), transparent 65%),
+        linear-gradient(180deg, #fbf9f6 0%, var(--sand) 100%);
+      padding: 80px 0 50px;
+    }
+    /* Ljusa granar i bakgrunden – en hint av Dalarna */
+    .hero::before {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 300px; pointer-events: none;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 260' preserveAspectRatio='none'%3E%3Cpath fill='%23ebeae4' d='M0 260V170l20-40 18 40 14-70 22 80 16-60 20 50 18-90 24 100 14-50 20 60 22-110 26 120 16-60 18 40 20-80 24 90 14-40 20 50 22-100 24 110 16-50 20 40 18-70 22 80 16-60 22 70 20-90 24 100 14-40 20 30L600 170V260z'/%3E%3C/svg%3E") repeat-x bottom / 600px 100%;
+    }
+    .hero .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1.15fr; gap: 30px; align-items: center; }
+    .hero h1 { font-size: clamp(3.4rem, 8vw, 6.4rem); font-weight: 800; letter-spacing: 1px; margin: 12px 0 6px; }
+    .slogan { font-family: var(--rubrik); font-weight: 600; text-transform: uppercase; letter-spacing: 6px; color: var(--morkt); font-size: clamp(1rem, 2vw, 1.3rem); }
+    .rod-linje { width: 140px; height: 3px; background: var(--rod); margin: 22px 0; border-radius: 2px; }
+    .hero p.ingress { font-size: 1.2rem; max-width: 460px; margin-bottom: 34px; }
+    .hero .cta-rad { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+
+    .bil-scen { position: relative; }
+    .bil-ram { position: relative; }
+    .bil-scen .bil { position: relative; z-index: 2; width: 100%; filter: drop-shadow(0 22px 18px rgba(40, 30, 20, .22)); animation: inkorning 1.4s cubic-bezier(.2,.8,.2,1) both; }
+    .bil-scen .skugga { position: absolute; z-index: 1; left: 6%; right: 4%; bottom: -6px; height: 36px; background: radial-gradient(ellipse at center, rgba(40, 30, 20, .35), transparent 70%); filter: blur(6px); }
+    .bil-scen .glans {
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      -webkit-mask: url("bilder/bil-sida.avif") center / contain no-repeat; mask: url("bilder/bil-sida.avif") center / contain no-repeat;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.45) 50%, transparent 60%) no-repeat;
+      background-size: 250% 100%; animation: glans 6s ease-in-out 1.6s infinite;
+    }
+    @keyframes inkorning { from { transform: translateX(18%); opacity: 0; } to { transform: none; opacity: 1; } }
+    @keyframes glans { 0% { background-position: 150% 0; } 35%, 100% { background-position: -50% 0; } }
+
+    .loften { position: relative; z-index: 4; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 4px; }
+    .lofte { display: flex; align-items: center; gap: 12px; background: var(--vit); border: 1px solid var(--linje); box-shadow: var(--skugga); padding: 10px 16px 10px 10px; border-radius: 12px; }
+    .lofte .ikon { width: 40px; height: 40px; border-radius: 50%; background: var(--rod-ljus); color: var(--rod); display: grid; place-items: center; flex-shrink: 0; }
+    .lofte .ikon svg { width: 20px; height: 20px; }
+    .lofte b { display: block; font-family: var(--rubrik); text-transform: uppercase; color: var(--morkt); font-size: 1.05rem; letter-spacing: 1px; line-height: 1.1; }
+    .lofte span { display: block; font-size: .85rem; color: var(--dampad); line-height: 1.25; margin-top: 2px; }
+
+    /* ---------- Fördelsband (som i referensen) ---------- */
+    .band { position: relative; background: var(--vit); border-bottom: 1px solid var(--linje); box-shadow: 0 6px 24px rgba(30, 25, 20, .05); }
+    .band .wrap { display: grid; grid-template-columns: 330px 1fr 1fr 1fr; align-items: stretch; padding: 0; }
+    .band-rod {
+      position: relative; background: linear-gradient(120deg, var(--rod-mork), var(--rod)); color: var(--vit); text-decoration: none;
+      display: flex; align-items: center; gap: 14px; padding: 26px 50px 26px 24px;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 34px) 100%, 0 100%);
+    }
+    .band-rod::before { content: ""; position: absolute; top: 0; bottom: 0; right: 100%; width: 100vw; background: var(--rod-mork); }
+    .band-rod img { height: 46px; }
+    .band-rod b { display: block; font-family: var(--rubrik); font-size: 1.5rem; letter-spacing: 1px; line-height: 1; }
+    .band-rod span { font-family: var(--rubrik); font-size: 1.3rem; font-weight: 600; letter-spacing: 1px; }
+    .band-punkt { display: flex; align-items: center; gap: 14px; padding: 22px 24px; border-left: 1px solid var(--linje); }
+    .band-punkt:nth-child(2) { border-left: 0; }
+    .band-punkt .ikon { width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--rod); display: grid; place-items: center; flex-shrink: 0; }
+    .band-punkt .ikon svg { width: 22px; height: 22px; color: var(--rod); }
+    .band-punkt b { display: block; font-family: var(--rubrik); text-transform: uppercase; color: var(--morkt); font-size: 1.15rem; letter-spacing: 1px; line-height: 1.1; }
+    .band-punkt span { font-size: .92rem; line-height: 1.3; display: block; color: var(--dampad); }
+
+    /* ---------- Sektioner ---------- */
+    section { padding: 100px 0; }
+    .rubrik { max-width: 680px; margin-bottom: 50px; }
+    .rubrik h2 { font-size: clamp(2.3rem, 5vw, 3.4rem); font-weight: 800; margin: 8px 0 14px; }
+    .rubrik p { font-size: 1.12rem; }
+
+    /* Så funkar det */
+    .steg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; counter-reset: steg; }
+    .steg { position: relative; background: var(--vit); border: 1px solid var(--linje); border-radius: 16px; padding: 34px 28px 30px; overflow: hidden; box-shadow: var(--skugga); transition: transform .25s, border-color .25s, box-shadow .25s; }
+    .steg:hover { transform: translateY(-4px); border-color: rgba(163, 32, 42, .4); box-shadow: 0 16px 36px rgba(30, 25, 20, .12); }
+    .steg::before { counter-increment: steg; content: "0" counter(steg); position: absolute; right: 18px; top: 6px; font-family: var(--rubrik); font-weight: 800; font-size: 5rem; color: rgba(163, 32, 42, .07); line-height: 1; }
+    .steg .ikon { width: 54px; height: 54px; border-radius: 14px; background: var(--rod-ljus); color: var(--rod); display: grid; place-items: center; margin-bottom: 20px; }
+    .steg .ikon svg { width: 26px; height: 26px; }
+    .steg h3 { font-size: 1.6rem; margin-bottom: 8px; }
+    .steg a { color: var(--morkt); font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--rod); }
+
+    /* Bilen */
+    .bilen { background: var(--sand); }
+    .bilen .wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
+    .bil-bild { position: relative; }
+    .bil-bild::before { content: ""; position: absolute; inset: 15% 5% -5%; background: radial-gradient(ellipse at center, rgba(163, 32, 42, .12), transparent 65%); filter: blur(20px); }
+    .bil-bild img { position: relative; filter: drop-shadow(0 22px 18px rgba(40, 30, 20, .22)); }
+    .modell { font-family: var(--rubrik); font-size: 1.15rem; color: var(--dampad); letter-spacing: 2px; text-transform: uppercase; margin-top: 18px; text-align: center; }
+    .fakta { list-style: none; display: grid; gap: 14px; margin-top: 8px; }
+    .fakta li { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: var(--vit); border: 1px solid var(--linje); border-radius: 14px; }
+    .fakta li svg { width: 24px; height: 24px; color: var(--rod); flex-shrink: 0; margin-top: 2px; }
+    .fakta b { color: var(--morkt); display: block; font-weight: 600; font-size: 1.05rem; }
+
+    /* Falun */
+    .falun .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .lugnet-kort { position: relative; background: linear-gradient(150deg, var(--vit), var(--sand)); border: 1px solid var(--linje); border-radius: 20px; padding: 44px 40px; box-shadow: var(--skugga); }
+    .lugnet-kort img { width: 72%; max-width: 330px; margin: 0 auto 26px; }
+    .lugnet-kort p { text-align: center; font-size: 1.05rem; }
+    .lugnet-kort p b { color: var(--morkt); }
+    .platser { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .platser li { list-style: none; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: 1px solid var(--linje); border-radius: 999px; color: var(--morkt); font-size: .98rem; background: var(--vit); transition: border-color .2s, background .2s; }
+    .platser li:hover { border-color: var(--rod); background: var(--rod-ljus); }
+    .platser li svg { width: 15px; height: 15px; color: var(--rod); }
+
+    /* Avslutande CTA */
+    .slut { padding: 0 0 110px; }
+    .slut-ruta {
+      position: relative; overflow: hidden; border-radius: 22px; padding: 70px 40px; text-align: center;
+      background: radial-gradient(ellipse 70% 120% at 50% 0%, #c02a34, var(--rod) 55%, var(--rod-mork));
+    }
+    .slut-ruta::after { content: ""; position: absolute; right: -40px; bottom: -30px; width: 340px; height: 210px; background: url("bilder/logo-vit.png") center / contain no-repeat; opacity: .12; }
+    .slut-ruta h2 { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 800; color: var(--vit); }
+    .slut-ruta p { color: rgba(255,255,255,.9); font-size: 1.2rem; margin: 12px 0 34px; }
+    .slut-ruta .ring { background: var(--vit); color: var(--rod-mork); box-shadow: 0 14px 40px rgba(0,0,0,.2); font-size: 1.6rem; }
+    .slut-ruta .ring .lur { background: var(--rod-ljus); }
+    .slut-ruta .ring .lur::after { border-color: rgba(163, 32, 42, .45); }
+    .slut-ruta .ring:hover { background: #fff6f6; }
+
+    footer { background: var(--sand); border-top: 1px solid var(--linje); padding: 34px 0; font-size: .95rem; color: var(--dampad); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center; }
+    footer .varumarke img { height: 30px; }
+    footer .varumarke b { font-size: 1.25rem; }
+    footer a { text-decoration: none; color: var(--morkt); }
+
+    /* Fast ringknapp på mobil */
+    .mobil-ring { display: none; }
+
+    /* Animering vid scroll */
+    .visa { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+    .visa.syns { opacity: 1; transform: none; }
+    .steg-grid .visa:nth-child(2) { transition-delay: .12s; }
+    .steg-grid .visa:nth-child(3) { transition-delay: .24s; }
+
+    /* ---------- Responsivt ---------- */
+    @media (max-width: 1000px) {
+      .hero { padding-top: 50px; }
+      .hero .wrap { grid-template-columns: 1fr; }
+      .bil-scen { margin-top: 10px; }
+      .band .wrap { grid-template-columns: 1fr 1fr 1fr; }
+      .band-rod { grid-column: 1 / -1; clip-path: none; justify-content: center; }
+      .band-punkt:nth-child(2) { border-left: 0; }
+      .bilen .wrap, .falun .wrap { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 700px) {
+      header .wrap { height: 62px; }
+      .varumarke img { height: 32px; }
+      .varumarke b { font-size: 1.35rem; }
+      .header-ring .nr { display: none; }
+      .header-ring .kort-text { display: inline; }
+      .header-ring { padding: 8px 14px; }
+      section { padding: 70px 0; }
+      .slogan { letter-spacing: 3px; }
+      .hero .ring, .sektion-cta .ring { width: 100%; justify-content: center; }
+      .sektion-cta { justify-content: center; text-align: center; }
+      .loften { grid-template-columns: 1fr; }
+      .lofte { padding: 8px 12px 8px 8px; }
+      .band .wrap { grid-template-columns: 1fr; }
+      .band-punkt { border-left: 0; border-top: 1px solid var(--linje); }
+      .steg-grid { grid-template-columns: 1fr; }
+      .lugnet-kort { padding: 34px 24px; }
+      .slut-ruta { padding: 54px 22px; }
+      .slut-ruta .ring { font-size: 1.3rem; padding: 14px 22px 14px 16px; }
+      footer { padding-bottom: 110px; }
+      .mobil-ring {
+        display: flex; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 50;
+        transform: translateY(140%); transition: transform .35s ease;
+      }
+      .mobil-ring.aktiv { transform: none; }
+      .mobil-ring .ring { width: 100%; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .visa { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ikoner som återanvänds -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-tel" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></symbol>
+    <symbol id="i-skold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-klocka" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+    <symbol id="i-stol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h5a2 2 0 0 1 2 2l1 9H8L6 5a2 2 0 0 1 1-2z"/><path d="M8 14h10a2 2 0 0 1 2 2v2H8"/><path d="M9 18v3M18 18v3"/></symbol>
+    <symbol id="i-blad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.1-6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-bil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v-5l-2-5H7l-2 5v5z"/><path d="M3 12h18"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/></symbol>
+    <symbol id="i-vaska" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+    <symbol id="i-gnistor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+  </svg>
+
+  <header>
+    <div class="wrap">
+      <a class="varumarke" href="#">
+        <img src="bilder/logo-rod.png" alt="">
+        <b>TAXI LUGNET</b>
+      </a>
+      <a class="header-ring" href="tel:+46703333818" aria-label="Ring Taxi Lugnet 070-333 38 18">
+        <svg><use href="#i-tel"/></svg><span class="nr">070-333 38 18</span><span class="kort-text">Ring</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-text">
+          <div class="overrubrik">Taxi i Falun</div>
+          <h1>Taxi Lugnet</h1>
+          <div class="slogan">Tryggt. Punktligt. Personligt.</div>
+          <div class="rod-linje"></div>
+          <p class="ingress">Din lokala taxi i Falun – när du behöver det. Ring oss direkt för snabb upphämtning.</p>
+          <div class="cta-rad">
+            <a class="ring" href="tel:+46703333818">
+              <span class="lur"><svg><use href="#i-tel"/></svg></span>
+              <span><small>Ring och boka</small>070-333 38 18</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="bil-scen">
+          <div class="bil-ram">
+          <div class="skugga"></div>
+          <picture><source srcset="bilder/bil-sida.avif" type="image/avif"><img class="bil" src="bilder/bil-sida.png" alt="Taxi Lugnets vita Toyota RAV4 Hybrid" width="1170" height="556"></picture>
+          <div class="glans"></div>
+          </div>
+          <div class="loften">
+            <div class="lofte"><div class="ikon"><svg><use href="#i-skold"/></svg></div><div><b>Tryggt</b><span>Säker och pålitlig service</span></div></div>
+            <div class="lofte"><div class="ikon"><svg><use href="#i-klocka"/></svg></div><div><b>Punktligt</b><span>Vi kommer när vi ska</span></div></div>
+            <div class="lofte"><div class="ikon"><svg><use href="#i-person"/></svg></div><div><b>Personligt</b><span>Service med ett leende</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FÖRDELSBAND -->
+    <div class="band">
+      <div class="wrap">
+        <a class="band-rod" href="tel:+46703333818">
+          <img src="bilder/logo-vit.png" alt="">
+          <div><b>TAXI LUGNET</b><span>070-333 38 18</span></div>
+        </a>
+        <div class="band-punkt"><div class="ikon"><svg><use href="#i-stol"/></svg></div><div><b>Bekväma resor</b><span>Modern och rymlig bil</span></div></div>
+        <div class="band-punkt"><div class="ikon"><svg><use href="#i-blad"/></svg></div><div><b>Miljövänligt</b><span>Hybridbil för en grönare framtid</span></div></div>
+        <div class="band-punkt"><div class="ikon"><svg><use href="#i-pin"/></svg></div><div><b>Lokalt</b><span>Vi finns här för dig</span></div></div>
+      </div>
+    </div>
+
+    <!-- SÅ ENKELT ÄR DET -->
+    <section>
+      <div class="wrap">
+        <div class="rubrik visa">
+          <div class="overrubrik">Behöver du taxi nu?</div>
+          <h2>Så enkelt är det</h2>
+          <p>Inga appar, inga konton. Du ringer – vi kör.</p>
+        </div>
+        <div class="steg-grid">
+          <div class="steg visa">
+            <div class="ikon"><svg><use href="#i-tel"/></svg></div>
+            <h3>Ring oss</h3>
+            <p>Slå <a href="tel:+46703333818">070-333 38 18</a> och boka din resa.</p>
+          </div>
+          <div class="steg visa">
+            <div class="ikon"><svg><use href="#i-pin"/></svg></div>
+            <h3>Berätta vart</h3>
+            <p>Säg var du står och vart du ska. Vill du åka senare bokar vi in en tid.</p>
+          </div>
+          <div class="steg visa">
+            <div class="ikon"><svg><use href="#i-bil"/></svg></div>
+            <h3>Vi hämtar dig</h3>
+            <p>Vi är snabbt på plats. Kliv in, luta dig tillbaka och ta det lugnt.</p>
+          </div>
+        </div>
+        <div class="sektion-cta mitten visa">
+          <a class="ring" href="tel:+46703333818">
+            <span class="lur"><svg><use href="#i-tel"/></svg></span>
+            <span><small>Ring och boka</small>070-333 38 18</span>
+          </a>
+          <p>Snabb upphämtning i hela Falun.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BILEN -->
+    <section class="bilen">
+      <div class="wrap">
+        <div class="bil-bild visa">
+          <picture><source srcset="bilder/bil-stan.avif" type="image/avif"><img src="bilder/bil-stan.png" alt="Taxi Lugnets bil sedd bakifrån från sidan" width="1290" height="577" loading="lazy"></picture>
+          <div class="modell">Toyota RAV4 Hybrid</div>
+        </div>
+        <div class="visa">
+          <div class="rubrik" style="margin-bottom:28px">
+            <div class="overrubrik">Bilen</div>
+            <h2>Bekvämt hela vägen</h2>
+            <p>Vi bryr oss om din komfort. Därför kör vi en rymlig och modern SUV som är skön att åka i – oavsett om resan är kort eller lång.</p>
+          </div>
+          <ul class="fakta">
+            <li><svg><use href="#i-stol"/></svg><div><b>Gott om plats</b>Sköna säten och bra benutrymme för alla passagerare.</div></li>
+            <li><svg><use href="#i-vaska"/></svg><div><b>Plats för bagaget</b>Stort bagageutrymme för resväskor, kassar och barnvagn.</div></li>
+            <li><svg><use href="#i-blad"/></svg><div><b>Tyst hybridbil</b>Mjuk och tyst gång – och bättre för miljön.</div></li>
+            <li><svg><use href="#i-gnistor"/></svg><div><b>Ren och fräsch</b>Bilen hålls ren inför varje resa.</div></li>
+          </ul>
+          <div class="sektion-cta">
+            <a class="ring" href="tel:+46703333818">
+              <span class="lur"><svg><use href="#i-tel"/></svg></span>
+              <span><small>Ring och boka</small>070-333 38 18</span>
+            </a>
+            <p>Kliv in och ta det lugnt.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FALUN -->
+    <section class="falun">
+      <div class="wrap">
+        <div class="visa">
+          <div class="rubrik" style="margin-bottom:0">
+            <div class="overrubrik">Lokal taxi i Falun</div>
+            <h2>Vi känner Falun utan och innan</h2>
+            <p>Lokala taxiresor på dina villkor – alltid nära till hands. Vi hittar rätt direkt och tar den smidigaste vägen, så att du kommer fram i tid.</p>
+          </div>
+          <ul class="platser">
+            <li><svg><use href="#i-pin"/></svg>Falun C</li>
+            <li><svg><use href="#i-pin"/></svg>Falu lasarett</li>
+            <li><svg><use href="#i-pin"/></svg>Lugnet</li>
+            <li><svg><use href="#i-pin"/></svg>Stora Torget</li>
+            <li><svg><use href="#i-pin"/></svg>Falu gruva</li>
+            <li><svg><use href="#i-pin"/></svg>Högskolan Dalarna</li>
+            <li><svg><use href="#i-pin"/></svg>Till och från jobbet</li>
+            <li><svg><use href="#i-pin"/></svg>Hem efter kvällen på stan</li>
+          </ul>
+        </div>
+        <div class="lugnet-kort visa">
+          <img src="bilder/logo-rod.png" alt="Taxi Lugnets logotyp – hoppbackarna i Lugnet" loading="lazy">
+          <p>Vår logga är <b>hoppbackarna i Lugnet</b> – Faluns kändaste siluett. Ett tecken på att vi är äkta Falubor och kör för Falubor.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLUT-CTA -->
+    <section class="slut">
+      <div class="wrap">
+        <div class="slut-ruta visa">
+          <h2>Behöver du taxi nu?</h2>
+          <p>Ring Taxi Lugnet för snabb taxi nära dig.</p>
+          <a class="ring" href="tel:+46703333818">
+            <span class="lur"><svg><use href="#i-tel"/></svg></span>
+            <span>070-333 38 18</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <a class="varumarke" href="#"><img src="bilder/logo-rod.png" alt=""><b>TAXI LUGNET</b></a>
+      <div>Taxi i Falun · <a href="tel:+46703333818">070-333 38 18</a></div>
+      <!-- TODO: organisationsnummer -->
+      <div>© <span id="ar">2026</span> Taxi Lugnet</div>
+    </div>
+  </footer>
+
+  <div class="mobil-ring">
+    <a class="ring" href="tel:+46703333818">
+      <span class="lur"><svg><use href="#i-tel"/></svg></span>
+      <span>Ring 070-333 38 18</span>
+    </a>
+  </div>
+
+  <script>
+    // Tona in sektioner vid scroll
+    const io = new IntersectionObserver((poster) => {
+      poster.forEach((p) => { if (p.isIntersecting) { p.target.classList.add('syns'); io.unobserve(p.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.visa').forEach((el) => io.observe(el));
+
+    // Visa den fasta ringknappen på mobil när hero-knappen har scrollats förbi
+    const mobilRing = document.querySelector('.mobil-ring');
+    new IntersectionObserver(([p]) => mobilRing.classList.toggle('aktiv', !p.isIntersecting))
+      .observe(document.querySelector('.hero .ring'));
+
+    document.getElementById('ar').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
