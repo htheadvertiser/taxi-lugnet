@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integritetspolicy – Taxi Lugnet</title>
+  <meta name="description" content="Så hanterar Taxi Lugnet dina personuppgifter och cookies.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/png" href="bilder/logo-rod.png">
+  <style>
+    @font-face { font-family: "Barlow"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonter/barlow-400.woff2") format("woff2"); }
+    @font-face { font-family: "Barlow"; font-weight: 600; font-style: normal; font-display: swap; src: url("fonter/barlow-600.woff2") format("woff2"); }
+    @font-face { font-family: "Barlow Condensed"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonter/barlow-condensed-700.woff2") format("woff2"); }
+    @font-face { font-family: "Barlow Condensed"; font-weight: 800; font-style: normal; font-display: swap; src: url("fonter/barlow-condensed-800.woff2") format("woff2"); }
+
+    :root {
+      --rod: #a3202a;
+      --rod-ljus: #fbeeee;
+      --vit: #ffffff;
+      --sand: #f6f4f0;
+      --text: #3a3d43;
+      --morkt: #16181b;
+      --dampad: #6b7079;
+      --linje: #e6e2dc;
+      --rubrik: "Barlow Condensed", "Arial Narrow", sans-serif;
+      --brod: "Barlow", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--brod); background: var(--vit); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    a { color: var(--rod); text-underline-offset: 3px; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    h1, h2 { font-family: var(--rubrik); color: var(--morkt); text-transform: uppercase; line-height: 1.05; letter-spacing: .5px; }
+
+    header { position: sticky; top: 0; z-index: 40; background: rgba(255, 255, 255, .88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--linje); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .varumarke { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .varumarke img { height: 40px; width: auto; }
+    .varumarke b { font-family: var(--rubrik); font-weight: 800; font-size: 1.6rem; color: var(--morkt); letter-spacing: 1px; }
+    .tillbaka { font-weight: 600; color: var(--morkt); text-decoration: none; }
+    .tillbaka:hover { color: var(--rod); }
+
+    main { max-width: 760px; margin: 0 auto; padding: 60px 24px 90px; }
+    .overrubrik { font-family: var(--rubrik); font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--rod); font-size: .95rem; }
+    h1 { font-size: clamp(2.6rem, 7vw, 4rem); font-weight: 800; margin: 8px 0 10px; }
+    .uppdaterad { color: var(--dampad); font-size: .95rem; }
+    .ingress { font-size: 1.15rem; margin-top: 22px; }
+    h2 { font-size: 1.7rem; font-weight: 800; margin: 48px 0 12px; }
+    p + p, p + ul, ul + p, table + p { margin-top: 12px; }
+    ul { padding-left: 22px; }
+    li + li { margin-top: 6px; }
+    b { color: var(--morkt); font-weight: 600; }
+
+    .tabell { overflow-x: auto; margin-top: 14px; border: 1px solid var(--linje); border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: .93rem; min-width: 540px; }
+    th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--linje); }
+    th { background: var(--sand); color: var(--morkt); font-weight: 600; }
+    tr:last-child td { border-bottom: 0; }
+    td code { font-size: .88rem; background: var(--rod-ljus); color: var(--morkt); padding: 1px 6px; border-radius: 4px; }
+
+    .ruta { background: var(--sand); border: 1px solid var(--linje); border-radius: 14px; padding: 20px 22px; margin-top: 14px; }
+    .knapp { display: inline-block; margin-top: 14px; background: var(--rod); color: var(--vit); text-decoration: none; font-family: var(--rubrik); font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase; padding: 11px 20px; border-radius: 8px; }
+    .knapp:hover { background: #b8252f; }
+
+    footer { background: var(--sand); border-top: 1px solid var(--linje); padding: 34px 0; font-size: .95rem; color: var(--dampad); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center; }
+    footer .varumarke img { height: 30px; }
+    footer .varumarke b { font-size: 1.25rem; }
+    footer a { text-decoration: none; color: var(--morkt); }
+
+    @media (max-width: 700px) {
+      header .wrap { height: 62px; }
+      .varumarke img { height: 32px; }
+      .varumarke b { font-size: 1.35rem; }
+      main { padding-top: 40px; }
+      h2 { margin-top: 38px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap">
+      <a class="varumarke" href="./">
+        <img src="bilder/logo-rod.png" alt="">
+        <b>TAXI LUGNET</b>
+      </a>
+      <a class="tillbaka" href="./">← Till startsidan</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="overrubrik">Personuppgifter och cookies</div>
+    <h1>Integritetspolicy</h1>
+    <p class="uppdaterad">Senast uppdaterad 14 oktober 2026</p>
+    <p class="ingress">Här berättar vi hur Taxi Lugnet hanterar dina personuppgifter när du åker med oss, ringer oss eller besöker vår webbplats – och vilka rättigheter du har.</p>
+
+    <h2>Vem ansvarar för dina uppgifter?</h2>
+    <p>Personuppgiftsansvarig är <b>Taxi Lugnet</b>, Falun.<!-- TODO: juridiskt företagsnamn och organisationsnummer --></p>
+    <p>Har du frågor om hur vi hanterar dina personuppgifter, eller vill du använda dina rättigheter? Ring oss på <a href="tel:+46703333818">070-333 38 18</a>.</p>
+
+    <h2>När du bokar och åker med oss</h2>
+    <p>När du ringer och bokar en resa behandlar vi de uppgifter som behövs för att utföra den:</p>
+    <ul>
+      <li>ditt telefonnummer och eventuellt namn,</li>
+      <li>upphämtnings- och avlämningsadress samt tid för resan,</li>
+      <li>uppgifter om betalning och kvitto,</li>
+      <li>särskilda önskemål du själv berättar om, till exempel behov av hjälp med bagage.</li>
+    </ul>
+    <p><b>Varför:</b> för att kunna hämta dig, köra dig och ta betalt. <b>Rättslig grund:</b> avtal – vi behöver uppgifterna för att utföra resan du har bokat.</p>
+    <p>Som taxiföretag är vi också skyldiga enligt lag att registrera och spara vissa uppgifter om resorna, bland annat genom taxameter och redovisningscentral enligt taxitrafiklagen, samt räkenskapsinformation enligt bokföringslagen. <b>Rättslig grund:</b> rättslig förpliktelse.</p>
+
+    <h2>När du besöker webbplatsen</h2>
+    <p>Webbplatsen har inga formulär och vi ber dig inte lämna några uppgifter här. Följande behandlas ändå:</p>
+    <ul>
+      <li><b>Teknisk drift.</b> Webbplatsen ligger hos Cloudflare. När du besöker den behandlas din IP-adress och tekniska uppgifter om din webbläsare kortvarigt för att sidan ska kunna visas och skyddas mot attacker. <b>Rättslig grund:</b> berättigat intresse av en säker och fungerande webbplats.</li>
+      <li><b>Ditt cookie-val.</b> Vi sparar ditt val i din webbläsare så att vi inte behöver fråga varje gång. <b>Rättslig grund:</b> nödvändigt för att följa reglerna om samtycke.</li>
+      <li><b>Annonsmätning med Google Ads – endast om du godkänner.</b> Om du godkänner marknadsföring i vår cookie-banner laddas Google Tag Manager och Google Ads. Google kan då registrera att du besökt sidan, om du kommit hit via en av våra annonser och om du ringer oss via numret på webbplatsen. För att mäta samtal kan Google visa ett vidarekopplingsnummer i stället för vårt vanliga nummer; Google registrerar då samtalets tid, längd och riktnummer. <b>Rättslig grund:</b> ditt samtycke.</li>
+    </ul>
+    <p>Säger du nej laddas varken Google Tag Manager eller Google Ads, och inga uppgifter skickas till Google från webbplatsen.</p>
+
+    <h2>Cookies vi använder</h2>
+    <p>En cookie är en liten textfil som sparas i din webbläsare. Vi använder bara det som står nedan.</p>
+    <div class="tabell">
+      <table>
+        <thead><tr><th>Namn</th><th>Typ</th><th>Syfte</th><th>Lagringstid</th></tr></thead>
+        <tbody>
+          <tr><td><code>taxilugnet-samtycke</code></td><td>Nödvändig<br>(lokal lagring)</td><td>Kommer ihåg ditt val i cookie-bannern.</td><td>12 månader</td></tr>
+          <tr><td><code>_gcl_au</code></td><td>Marknadsföring<br>(Google Ads)</td><td>Kopplar ett besök eller samtal till en annons du klickat på.</td><td>90 dagar</td></tr>
+          <tr><td><code>_gcl_aw</code>, <code>_gcl_dc</code></td><td>Marknadsföring<br>(Google Ads)</td><td>Sparar annonsklick-ID när du kommer hit via en annons.</td><td>90 dagar</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Har du godkänt marknadsföring kan Google även använda egna cookies på sina domäner, till exempel google.com och doubleclick.net. Läs mer i <a href="https://policies.google.com/technologies/ads?hl=sv" rel="noopener">Googles information om annonscookies</a>.</p>
+
+    <div class="ruta">
+      <b>Ändra eller återkalla ditt samtycke</b>
+      <p style="margin-top:6px">Du kan när som helst ändra ditt val. Återkallar du samtycket tas Googles cookies bort från vår webbplats.</p>
+      <a class="knapp" href="./#cookie-installningar">Ändra cookie-inställningar</a>
+    </div>
+
+    <h2>Vilka delar vi uppgifter med?</h2>
+    <ul>
+      <li><b>Redovisningscentral och Skatteverket</b> – resedata från taxametern, enligt taxitrafiklagen.</li>
+      <li><b>Betaltjänstleverantörer</b> – när du betalar med kort, för att genomföra betalningen.</li>
+      <li><b>Cloudflare, Inc.</b> – driftar webbplatsen.</li>
+      <li><b>Google Ireland Ltd.</b> – Google Tag Manager och Google Ads, endast om du har godkänt marknadsföring.</li>
+    </ul>
+    <p>Vi säljer aldrig dina personuppgifter.</p>
+
+    <h2>Överföring utanför EU</h2>
+    <p>Google och Cloudflare kan behandla uppgifter i USA. Båda företagen är anslutna till EU–US Data Privacy Framework, som EU-kommissionen har beslutat ger en tillräcklig skyddsnivå. Därutöver används EU-kommissionens standardavtalsklausuler.</p>
+
+    <h2>Hur länge sparar vi uppgifterna?</h2>
+    <ul>
+      <li><b>Bokningsuppgifter</b> som inte behövs för redovisning raderas när resan är genomförd och betald.</li>
+      <li><b>Kvitton och räkenskapsinformation</b> sparas i sju år enligt bokföringslagen.</li>
+      <li><b>Taxameterdata</b> sparas så länge taxitrafiklagen kräver.</li>
+      <li><b>Cookies</b> enligt tabellen ovan.</li>
+    </ul>
+
+    <h2>Dina rättigheter</h2>
+    <p>Enligt dataskyddsförordningen (GDPR) har du rätt att:</p>
+    <ul>
+      <li>få veta vilka uppgifter vi har om dig och få en kopia (registerutdrag),</li>
+      <li>få felaktiga uppgifter rättade,</li>
+      <li>få uppgifter raderade, om vi inte måste spara dem enligt lag,</li>
+      <li>begära att behandlingen begränsas,</li>
+      <li>invända mot behandling som grundar sig på berättigat intresse,</li>
+      <li>få ut uppgifter du lämnat till oss i ett maskinläsbart format (dataportabilitet),</li>
+      <li>när som helst återkalla ett samtycke.</li>
+    </ul>
+    <p>Kontakta oss på <a href="tel:+46703333818">070-333 38 18</a> så hjälper vi dig.</p>
+
+    <h2>Klagomål</h2>
+    <p>Är du missnöjd med hur vi hanterar dina personuppgifter får du gärna höra av dig till oss först. Du har också rätt att lämna klagomål till Integritetsskyddsmyndigheten (IMY), <a href="https://www.imy.se" rel="noopener">imy.se</a>.</p>
+
+    <h2>Ändringar</h2>
+    <p>Vi kan komma att uppdatera denna policy, till exempel om vi börjar använda nya verktyg på webbplatsen. Den senaste versionen finns alltid här, och datumet högst upp visar när den senast ändrades.</p>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <a class="varumarke" href="./"><img src="bilder/logo-rod.png" alt=""><b>TAXI LUGNET</b></a>
+      <div>Taxi i Falun · <a href="tel:+46703333818">070-333 38 18</a></div>
+      <div>© <span id="ar">2026</span> Taxi Lugnet</div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('ar').textContent = new Date().getFullYear();</script>
+</body>
+</html>

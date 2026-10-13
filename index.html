@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Taxi Lugnet – Taxi i Falun | Ring 070-333 38 18</title>
   <meta name="description" content="Taxi Lugnet – din lokala taxi i Falun. Tryggt, punktligt och personligt. Ring 070-333 38 18 för snabb upphämtning.">
-  <!-- Förhandsvisning: ta bort noindex när sidan lanseras på riktigt -->
-  <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#ffffff">
   <link rel="icon" type="image/png" href="bilder/logo-rod.png">
   <link rel="preload" href="fonter/barlow-condensed-800.woff2" as="font" type="font/woff2" crossorigin>
@@ -512,13 +510,13 @@
       <a class="varumarke" href="#"><img src="bilder/logo-rod.png" alt=""><b>TAXI LUGNET</b></a>
       <div>Taxi i Falun · <a href="tel:+46703333818">070-333 38 18</a></div>
       <!-- TODO: organisationsnummer -->
-      <div>© <span id="ar">2026</span> Taxi Lugnet · <button type="button" class="cookie-lank" id="cookie-installningar">Cookie-inställningar</button></div>
+      <div>© <span id="ar">2026</span> Taxi Lugnet · <button type="button" class="cookie-lank" id="cookie-installningar">Cookie-inställningar</button> · <a href="integritetspolicy.html">Integritetspolicy</a></div>
     </div>
   </footer>
 
   <div class="samtycke" id="samtycke" role="dialog" aria-labelledby="samtycke-rubrik" aria-describedby="samtycke-text" hidden>
     <h2 id="samtycke-rubrik">Cookies</h2>
-    <p id="samtycke-text">Vi vill använda cookies från Google för att mäta hur bra våra annonser fungerar, till exempel hur många som ringer oss efter att ha sett en annons. Det gör vi bara om du godkänner. Sidan fungerar lika bra oavsett vad du väljer, och du kan ändra dig när som helst via ”Cookie-inställningar” längst ner på sidan.</p>
+    <p id="samtycke-text">Vi vill använda cookies från Google för att mäta hur bra våra annonser fungerar, till exempel hur många som ringer oss efter att ha sett en annons. Det gör vi bara om du godkänner. Sidan fungerar lika bra oavsett vad du väljer, och du kan ändra dig när som helst via ”Cookie-inställningar” längst ner på sidan. <a href="integritetspolicy.html">Läs mer i vår integritetspolicy</a>.</p>
     <div class="samtycke-val" hidden>
       <label class="val"><input type="checkbox" checked disabled><span><b>Nödvändiga</b>Krävs för att sidan ska fungera, till exempel för att komma ihåg ditt val här. Alltid på.</span></label>
       <label class="val"><input type="checkbox" data-kategori="marknadsforing"><span><b>Marknadsföring</b>Används för att mäta och anpassa våra annonser, via Google Ads. Uppgifter om ditt besök delas då med Google.</span></label>
@@ -644,7 +642,11 @@
 
       const sparat = lasVal();
       if (sparat) aktivera(sparat);
-      else oppna(false);
+      // Länken "Ändra cookie-inställningar" på integritetspolicyn öppnar inställningarna direkt
+      if (location.hash === '#cookie-installningar') {
+        history.replaceState(null, '', location.pathname + location.search);
+        oppna(true);
+      } else if (!sparat) oppna(false);
     })();
   </script>
 </body>
