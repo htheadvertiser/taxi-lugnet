@@ -9,10 +9,49 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#ffffff">
   <link rel="icon" type="image/png" href="bilder/logo-rod.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonter/barlow-condensed-800.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonter/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+
+  <script>
+    // Google Consent Mode v2 – allt spårande är nekat tills besökaren har gjort ett val.
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted'
+    });
+  </script>
+
+  <!--
+    SPÅRNINGSSKRIPT
+    Lägg alla spårningsskript här med type="text/plain" och data-samtycke="statistik" eller
+    data-samtycke="marknadsforing". De körs först när besökaren har godkänt den kategorin.
+    Externa skript: lägg adressen i data-src i stället för src.
+    Höj VERSION i samtyckesskriptet längst ner när du lägger till ett nytt verktyg.
+
+    Google Analytics 4 (byt G-XXXXXXXXXX):
+    <script type="text/plain" data-samtycke="statistik" data-src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script type="text/plain" data-samtycke="statistik">gtag('js', new Date()); gtag('config', 'G-XXXXXXXXXX');</script>
+
+    Google Ads (byt AW-XXXXXXXXX):
+    <script type="text/plain" data-samtycke="marknadsforing" data-src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
+    <script type="text/plain" data-samtycke="marknadsforing">gtag('js', new Date()); gtag('config', 'AW-XXXXXXXXX');</script>
+
+    Meta Pixel: klistra in Metas kod i ett <script type="text/plain" data-samtycke="marknadsforing">…</script>
+  -->
+
   <style>
+    @font-face { font-family: "Barlow"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonter/barlow-400.woff2") format("woff2"); }
+    @font-face { font-family: "Barlow"; font-weight: 500; font-style: normal; font-display: swap; src: url("fonter/barlow-500.woff2") format("woff2"); }
+    @font-face { font-family: "Barlow"; font-weight: 600; font-style: normal; font-display: swap; src: url("fonter/barlow-600.woff2") format("woff2"); }
+    @font-face { font-family: "Barlow Condensed"; font-weight: 600; font-style: normal; font-display: swap; src: url("fonter/barlow-condensed-600.woff2") format("woff2"); }
+    @font-face { font-family: "Barlow Condensed"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonter/barlow-condensed-700.woff2") format("woff2"); }
+    @font-face { font-family: "Barlow Condensed"; font-weight: 800; font-style: normal; font-display: swap; src: url("fonter/barlow-condensed-800.woff2") format("woff2"); }
+
     :root {
       --rod: #a3202a;
       --rod-mork: #7d161e;
@@ -196,6 +235,38 @@
     footer .varumarke img { height: 30px; }
     footer .varumarke b { font-size: 1.25rem; }
     footer a { text-decoration: none; color: var(--morkt); }
+    .cookie-lank { background: none; border: 0; padding: 0; font: inherit; color: var(--morkt); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+    /* ---------- Samtycke (cookies) ---------- */
+    .samtycke {
+      position: fixed; z-index: 60; left: 16px; bottom: 16px; width: min(440px, calc(100% - 32px));
+      max-height: calc(100vh - 32px); overflow-y: auto;
+      background: var(--vit); border: 1px solid var(--linje); border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(30, 25, 20, .22); padding: 22px 22px 18px;
+    }
+    .samtycke [hidden], .samtycke[hidden] { display: none !important; }
+    .samtycke h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
+    .samtycke p { font-size: .95rem; line-height: 1.5; }
+    .samtycke-val { display: grid; gap: 10px; margin-top: 16px; }
+    .val { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--linje); border-radius: 12px; cursor: pointer; font-size: .88rem; line-height: 1.4; color: var(--dampad); }
+    .val:has(input:disabled) { cursor: default; background: var(--sand); }
+    .val b { display: block; color: var(--morkt); font-size: .98rem; font-weight: 600; }
+    .val input { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: var(--rod); }
+    .samtycke-knappar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+    .samtycke-knappar button {
+      font-family: var(--rubrik); font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase;
+      padding: 11px 14px; border-radius: 8px; border: 2px solid var(--rod); background: var(--rod); color: var(--vit); cursor: pointer;
+      transition: background .2s;
+    }
+    .samtycke-knappar button:hover { background: #b8252f; }
+    .samtycke-knappar .spara { grid-column: 1 / -1; background: var(--vit); color: var(--rod); }
+    .samtycke-knappar .spara:hover { background: var(--rod-ljus); }
+    .samtycke-knappar .lank {
+      grid-column: 1 / -1; justify-self: center; background: none; border: 0; padding: 4px;
+      font-family: var(--brod); font-size: .95rem; font-weight: 600; letter-spacing: 0; text-transform: none;
+      color: var(--morkt); text-decoration: underline; text-underline-offset: 3px;
+    }
+    .samtycke-knappar .lank:hover { background: none; color: var(--rod); }
 
     /* Fast ringknapp på mobil */
     .mobil-ring { display: none; }
@@ -236,6 +307,7 @@
       .slut-ruta { padding: 54px 22px; }
       .slut-ruta .ring { font-size: 1.3rem; padding: 14px 22px 14px 16px; }
       footer { padding-bottom: 110px; }
+      .samtycke { left: 12px; bottom: 12px; width: calc(100% - 24px); max-height: calc(100vh - 24px); padding: 20px 18px 16px; }
       .mobil-ring {
         display: flex; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 50;
         transform: translateY(140%); transition: transform .35s ease;
@@ -435,9 +507,25 @@
       <a class="varumarke" href="#"><img src="bilder/logo-rod.png" alt=""><b>TAXI LUGNET</b></a>
       <div>Taxi i Falun · <a href="tel:+46703333818">070-333 38 18</a></div>
       <!-- TODO: organisationsnummer -->
-      <div>© <span id="ar">2026</span> Taxi Lugnet</div>
+      <div>© <span id="ar">2026</span> Taxi Lugnet · <button type="button" class="cookie-lank" id="cookie-installningar">Cookie-inställningar</button></div>
     </div>
   </footer>
+
+  <div class="samtycke" id="samtycke" role="dialog" aria-labelledby="samtycke-rubrik" aria-describedby="samtycke-text" hidden>
+    <h2 id="samtycke-rubrik">Cookies</h2>
+    <p id="samtycke-text">Vi vill använda cookies för att se hur sidan används och för att mäta våra annonser. Det gör vi bara om du godkänner. Sidan fungerar lika bra oavsett vad du väljer, och du kan ändra dig när som helst via ”Cookie-inställningar” längst ner på sidan.</p>
+    <div class="samtycke-val" hidden>
+      <label class="val"><input type="checkbox" checked disabled><span><b>Nödvändiga</b>Krävs för att sidan ska fungera, till exempel för att komma ihåg ditt val här. Alltid på.</span></label>
+      <label class="val"><input type="checkbox" data-kategori="statistik"><span><b>Statistik</b>Hjälper oss förstå hur besökare använder sidan, till exempel hur många som besöker den och var de kommer ifrån.</span></label>
+      <label class="val"><input type="checkbox" data-kategori="marknadsforing"><span><b>Marknadsföring</b>Används för att mäta och anpassa våra annonser, till exempel hos Google och Meta (Facebook/Instagram). Uppgifter delas då med dessa företag.</span></label>
+    </div>
+    <div class="samtycke-knappar">
+      <button type="button" data-val="neka">Avvisa alla</button>
+      <button type="button" data-val="godkann">Acceptera alla</button>
+      <button type="button" class="spara" data-val="spara" hidden>Spara mina val</button>
+      <button type="button" class="lank" data-val="installningar">Inställningar</button>
+    </div>
+  </div>
 
   <div class="mobil-ring">
     <a class="ring" href="tel:+46703333818">
@@ -459,6 +547,98 @@
       .observe(document.querySelector('.hero .ring'));
 
     document.getElementById('ar').textContent = new Date().getFullYear();
+
+    // ---------- Samtycke (cookies) ----------
+    (() => {
+      const NYCKEL = 'taxilugnet-samtycke';
+      const VERSION = 1;          // Höj när ett nytt spårningsverktyg läggs till – då frågas alla besökare igen
+      const GILTIG_DAGAR = 365;   // Fråga igen efter ett år
+      const KATEGORIER = ['statistik', 'marknadsforing'];
+
+      const ruta = document.getElementById('samtycke');
+      const valPanel = ruta.querySelector('.samtycke-val');
+      const knapp = (v) => ruta.querySelector(`[data-val="${v}"]`);
+      const kryss = (k) => ruta.querySelector(`[data-kategori="${k}"]`);
+
+      function lasVal() {
+        try {
+          const s = JSON.parse(localStorage.getItem(NYCKEL));
+          if (s && s.version === VERSION && Date.now() - s.datum < GILTIG_DAGAR * 864e5) return s;
+        } catch (e) {}
+        return null;
+      }
+
+      function sparaVal(val) {
+        const s = { ...val, version: VERSION, datum: Date.now() };
+        try { localStorage.setItem(NYCKEL, JSON.stringify(s)); } catch (e) {}
+        return s;
+      }
+
+      // Släpp fram skripten för de kategorier besökaren har godkänt
+      function aktivera(s) {
+        gtag('consent', 'update', {
+          analytics_storage: s.statistik ? 'granted' : 'denied',
+          ad_storage: s.marknadsforing ? 'granted' : 'denied',
+          ad_user_data: s.marknadsforing ? 'granted' : 'denied',
+          ad_personalization: s.marknadsforing ? 'granted' : 'denied'
+        });
+        document.querySelectorAll('script[type="text/plain"][data-samtycke]').forEach((vilande) => {
+          if (!s[vilande.dataset.samtycke]) return;
+          const skript = document.createElement('script');
+          if (vilande.dataset.src) { skript.src = vilande.dataset.src; skript.async = true; }
+          else skript.textContent = vilande.textContent;
+          vilande.replaceWith(skript);
+        });
+      }
+
+      // Ta bort spårningscookies som redan satts (Google Analytics/Ads, Meta, Clarity)
+      function rensaCookies() {
+        const bas = location.hostname.replace(/^www\./, '');
+        const domaner = ['', location.hostname, '.' + bas];
+        document.cookie.split(';').forEach((c) => {
+          const namn = c.split('=')[0].trim();
+          if (!/^(_ga|_gid|_gat|_gcl|_fbp|_fbc|_clck|_clsk)/.test(namn)) return;
+          domaner.forEach((d) => { document.cookie = `${namn}=; Max-Age=0; path=/${d ? '; domain=' + d : ''}`; });
+        });
+      }
+
+      function visaInstallningar(visa) {
+        valPanel.hidden = !visa;
+        knapp('spara').hidden = !visa;
+        knapp('installningar').hidden = visa;
+      }
+
+      function oppna(medInstallningar) {
+        const s = lasVal();
+        KATEGORIER.forEach((k) => { kryss(k).checked = !!(s && s[k]); });
+        visaInstallningar(medInstallningar);
+        ruta.hidden = false;
+        if (medInstallningar) kryss('statistik').focus();
+      }
+
+      function valj(val) {
+        const forra = lasVal();
+        const s = sparaVal(val);
+        ruta.hidden = true;
+        // Har besökaren dragit tillbaka ett samtycke kan redan laddade skript inte stoppas – rensa och ladda om
+        if (forra && KATEGORIER.some((k) => forra[k] && !s[k])) {
+          rensaCookies();
+          location.reload();
+          return;
+        }
+        aktivera(s);
+      }
+
+      knapp('godkann').addEventListener('click', () => valj({ statistik: true, marknadsforing: true }));
+      knapp('neka').addEventListener('click', () => valj({ statistik: false, marknadsforing: false }));
+      knapp('spara').addEventListener('click', () => valj({ statistik: kryss('statistik').checked, marknadsforing: kryss('marknadsforing').checked }));
+      knapp('installningar').addEventListener('click', () => { visaInstallningar(true); kryss('statistik').focus(); });
+      document.getElementById('cookie-installningar').addEventListener('click', () => oppna(true));
+
+      const sparat = lasVal();
+      if (sparat) aktivera(sparat);
+      else oppna(false);
+    })();
   </script>
 </body>
 </html>
