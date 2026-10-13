@@ -24,25 +24,30 @@
       functionality_storage: 'granted',
       security_storage: 'granted'
     });
+    // Rensa bort annonsklick-ID:n ur Googles anrop så länge marknadsföring inte är godkänd
+    gtag('set', 'ads_data_redaction', true);
   </script>
 
   <!--
     SPÅRNINGSSKRIPT
-    Lägg alla spårningsskript här med type="text/plain" och data-samtycke="statistik" eller
-    data-samtycke="marknadsforing". De körs först när besökaren har godkänt den kategorin.
+    Lägg alla spårningsskript här med type="text/plain" och data-samtycke="marknadsforing"
+    (eller "statistik" om den kategorin läggs tillbaka; flera kategorier = körs om någon av dem godkänts).
     Externa skript: lägg adressen i data-src i stället för src.
     Höj VERSION i samtyckesskriptet längst ner när du lägger till ett nytt verktyg.
 
-    Google Analytics 4 (byt G-XXXXXXXXXX):
-    <script type="text/plain" data-samtycke="statistik" data-src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script type="text/plain" data-samtycke="statistik">gtag('js', new Date()); gtag('config', 'G-XXXXXXXXXX');</script>
-
-    Google Ads (byt AW-XXXXXXXXX):
-    <script type="text/plain" data-samtycke="marknadsforing" data-src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
-    <script type="text/plain" data-samtycke="marknadsforing">gtag('js', new Date()); gtag('config', 'AW-XXXXXXXXX');</script>
-
-    Meta Pixel: klistra in Metas kod i ett <script type="text/plain" data-samtycke="marknadsforing">…</script>
+    Google Tag Manager innehåller bara Google Ads och laddas först när besökaren godkänt
+    marknadsföring. Alla taggar i GTM kräver dessutom ad_storage ("Kräv ytterligare samtycke").
+    Läggs GA4 till: lägg tillbaka kategorin Statistik i bannern och i KATEGORIER, och lägg till
+    "statistik" här nedan. GA4-taggen i GTM ska då kräva analytics_storage.
+    GTM:s <noscript>-iframe är medvetet utelämnad – den skulle ladda Google utan samtycke.
   -->
+  <!-- Google Tag Manager -->
+  <script type="text/plain" data-samtycke="marknadsforing">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T4Q7VVN5');</script>
+  <!-- End Google Tag Manager -->
 
   <style>
     @font-face { font-family: "Barlow"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonter/barlow-400.woff2") format("woff2"); }
@@ -513,11 +518,10 @@
 
   <div class="samtycke" id="samtycke" role="dialog" aria-labelledby="samtycke-rubrik" aria-describedby="samtycke-text" hidden>
     <h2 id="samtycke-rubrik">Cookies</h2>
-    <p id="samtycke-text">Vi vill använda cookies för att se hur sidan används och för att mäta våra annonser. Det gör vi bara om du godkänner. Sidan fungerar lika bra oavsett vad du väljer, och du kan ändra dig när som helst via ”Cookie-inställningar” längst ner på sidan.</p>
+    <p id="samtycke-text">Vi vill använda cookies från Google för att mäta hur bra våra annonser fungerar, till exempel hur många som ringer oss efter att ha sett en annons. Det gör vi bara om du godkänner. Sidan fungerar lika bra oavsett vad du väljer, och du kan ändra dig när som helst via ”Cookie-inställningar” längst ner på sidan.</p>
     <div class="samtycke-val" hidden>
       <label class="val"><input type="checkbox" checked disabled><span><b>Nödvändiga</b>Krävs för att sidan ska fungera, till exempel för att komma ihåg ditt val här. Alltid på.</span></label>
-      <label class="val"><input type="checkbox" data-kategori="statistik"><span><b>Statistik</b>Hjälper oss förstå hur besökare använder sidan, till exempel hur många som besöker den och var de kommer ifrån.</span></label>
-      <label class="val"><input type="checkbox" data-kategori="marknadsforing"><span><b>Marknadsföring</b>Används för att mäta och anpassa våra annonser, till exempel hos Google och Meta (Facebook/Instagram). Uppgifter delas då med dessa företag.</span></label>
+      <label class="val"><input type="checkbox" data-kategori="marknadsforing"><span><b>Marknadsföring</b>Används för att mäta och anpassa våra annonser, via Google Ads. Uppgifter om ditt besök delas då med Google.</span></label>
     </div>
     <div class="samtycke-knappar">
       <button type="button" data-val="neka">Avvisa alla</button>
@@ -551,9 +555,9 @@
     // ---------- Samtycke (cookies) ----------
     (() => {
       const NYCKEL = 'taxilugnet-samtycke';
-      const VERSION = 1;          // Höj när ett nytt spårningsverktyg läggs till – då frågas alla besökare igen
+      const VERSION = 2;          // Höj när ett nytt spårningsverktyg läggs till – då frågas alla besökare igen
       const GILTIG_DAGAR = 365;   // Fråga igen efter ett år
-      const KATEGORIER = ['statistik', 'marknadsforing'];
+      const KATEGORIER = ['marknadsforing'];  // Lägg till 'statistik' om GA4 införs
 
       const ruta = document.getElementById('samtycke');
       const valPanel = ruta.querySelector('.samtycke-val');
@@ -583,12 +587,14 @@
           ad_personalization: s.marknadsforing ? 'granted' : 'denied'
         });
         document.querySelectorAll('script[type="text/plain"][data-samtycke]').forEach((vilande) => {
-          if (!s[vilande.dataset.samtycke]) return;
+          if (!vilande.dataset.samtycke.split(' ').some((k) => s[k])) return;
           const skript = document.createElement('script');
           if (vilande.dataset.src) { skript.src = vilande.dataset.src; skript.async = true; }
           else skript.textContent = vilande.textContent;
           vilande.replaceWith(skript);
         });
+        // Signal till GTM, kan användas som utlösare för taggar som väntar på samtycke
+        dataLayer.push({ event: 'samtycke_uppdaterat', samtycke_statistik: !!s.statistik, samtycke_marknadsforing: !!s.marknadsforing });
       }
 
       // Ta bort spårningscookies som redan satts (Google Analytics/Ads, Meta, Clarity)
@@ -613,7 +619,7 @@
         KATEGORIER.forEach((k) => { kryss(k).checked = !!(s && s[k]); });
         visaInstallningar(medInstallningar);
         ruta.hidden = false;
-        if (medInstallningar) kryss('statistik').focus();
+        if (medInstallningar) kryss(KATEGORIER[0]).focus();
       }
 
       function valj(val) {
@@ -629,10 +635,11 @@
         aktivera(s);
       }
 
-      knapp('godkann').addEventListener('click', () => valj({ statistik: true, marknadsforing: true }));
-      knapp('neka').addEventListener('click', () => valj({ statistik: false, marknadsforing: false }));
-      knapp('spara').addEventListener('click', () => valj({ statistik: kryss('statistik').checked, marknadsforing: kryss('marknadsforing').checked }));
-      knapp('installningar').addEventListener('click', () => { visaInstallningar(true); kryss('statistik').focus(); });
+      const alla = (varde) => Object.fromEntries(KATEGORIER.map((k) => [k, varde]));
+      knapp('godkann').addEventListener('click', () => valj(alla(true)));
+      knapp('neka').addEventListener('click', () => valj(alla(false)));
+      knapp('spara').addEventListener('click', () => valj(Object.fromEntries(KATEGORIER.map((k) => [k, kryss(k).checked]))));
+      knapp('installningar').addEventListener('click', () => { visaInstallningar(true); kryss(KATEGORIER[0]).focus(); });
       document.getElementById('cookie-installningar').addEventListener('click', () => oppna(true));
 
       const sparat = lasVal();
